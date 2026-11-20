@@ -1,0 +1,305 @@
+{
+ "passages": {
+  "method": "chromadb (all-MiniLM-L6-v2, local)",
+  "retrieved": true,
+  "index_note": null,
+  "reason": null,
+  "relevance_bar": 0.45,
+  "topics": [
+   {
+    "id": "TP1",
+    "kind": "claim",
+    "claim_id": "CL1",
+    "text": "EPS $1.89 against $1.97 expected (-4.1%); revenue $201.94B against $202.22B expected (-0.1%). Results below estimates, reported 2026-10-29.",
+    "for": [
+     "P1"
+    ],
+    "against": [
+     "P2"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "Stocks fall in the weeks after earnings miss estimates; post-earnings announcement drift in the negative direction",
+      "opposes_query": "Post-earnings drift after an earnings miss has disappeared in liquid stocks; a below-estimate result is already priced in",
+      "returned": [
+       "R08-004",
+       "R08-007",
+       "R14-038",
+       "R14-039",
+       "R14-042",
+       "R14-043",
+       "R14-075",
+       "R18-017",
+       "R18-018"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "TPS",
+    "kind": "structure",
+    "claim_id": null,
+    "text": "Bear call spread (credit): a short-premium (net credit) option strategy with defined risk on a single stock, held to expiration; whether selling option premium earns a return after trading costs",
+    "for": [
+     "P3"
+    ],
+    "against": [
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "Selling defined-risk call spreads for net credit earns a positive return over time; short option premium strategies profit after costs",
+      "opposes_query": "Selling option premium through short call spreads does not earn a return after trading costs; credit spread returns vanish once fees and tail losses are included",
+      "returned": [
+       "R05-007",
+       "R07-059",
+       "R11-070",
+       "R13-026",
+       "R14-007",
+       "R14-010",
+       "R14-048",
+       "R14-050",
+       "SPEC-031"
+      ]
+     }
+    ]
+   }
+  ],
+  "passages": {
+   "P1": {
+    "ref": "P1",
+    "passage_id": "R08-004",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 1. Post-earnings announcement drift \u2014 the original effect",
+    "grade": "Strong (for the historical effect)",
+    "text": "**CLAIM:** PEAD is the longest-surviving and best-documented directional anomaly; sorting on standardised unexpected earnings (SUE) historically produced roughly 2% abnormal return over the 60 trading days following an announcement, with drift persisting two to three quarters.\n**SOURCE:** Ball & Brown (1968), *Journal of Accounting Research*; Bernard & Thomas (1989), *Journal of Accounting Research* 27, 1\u201336; reviewed in Josef Fink, \"A Review of the Post-Earnings-Announcement Drift,\" University of Graz Working Paper 2020-04 (Nov 2020), https://static.uni-graz.at/fileadmin/sowi/Working_Paper/2020-04_Fink.pdf \u2014 **peer-reviewed originals, working-paper review**\n**EVIDENCE STRENGTH:** Strong (for the historical effect)\n**HORIZON:** Drift strongest in the first quarter after announcement; persists 2\u20133 quarters. Fink reports Bernard & Thomas at ~2% over 60 trading days, ~4% per quarter; early long/short estimates reach ~18% annualised.\n**DECAY EVIDENCE:** See finding 2 \u2014 substantial.\n**DATA OBTAINABILITY:** Excellent. SUE from a time-series model of quarterly EPS is computable **entirely from EDGAR XBRL** (`EarningsPerShareDiluted`, quarterly, 8+ quarters history). Analyst-based SUE needs IBES or a vendor. Fink notes analyst-forecast-based surprises produce *larger* drift than time-series surprises \u2014 so the free version is the weaker version.\n**IMPLICATION FOR THE APP:** The 60-day drift window maps cleanly onto 60\u201390 DTE contracts. This is the single best horizon fit in the entire literature for this product. The problem is entirely whether it still exists.\n\n---"
+   },
+   "P2": {
+    "ref": "P2",
+    "passage_id": "R08-007",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 3. PEAD out of sample, 2023\u20132026",
+    "grade": "Weak (methodologically transparent but unrefereed, <4 years, one regime, self-disclosed probable survivorship bias)",
+    "text": "**CLAIM:** An independent out-of-sample test over 43,111 announcements from Jan 2023 to Oct 2026 finds PEAD still present in large caps but small and fading fast.\n**SOURCE:** Gaurav Gupta, \"Is Post-Earnings Drift Still Tradable? 43,000 Announcements, 2023\u20132026,\" https://guptagaurav.info/articles/earnings-drift \u2014 **practitioner blog post, not peer-reviewed; author discloses AI assistance in the analysis**\n**EVIDENCE STRENGTH:** Weak (methodologically transparent but unrefereed, <4 years, one regime, self-disclosed probable survivorship bias)\n**HORIZON:** Position formed at close of day +1, drift measured days +2 to +61 \u2014 i.e. ~3 months. Direct fit to 60\u201390 DTE.\n**DECAY EVIDENCE:** Top-minus-bottom SUE quintile spread, all sizes: +1.7 pp over 60 days (t = 4.2). Large caps (>$10bn): +2.0 pp (t = 3.4). Mid: +1.4 pp (t = 2.9). Small: +1.1 pp (t = 2.1). **But the spread is +2.6 pp for 2023\u201324 announcements versus +0.5 pp for 2025\u201326.** The earnings-announcement-return (EAR) variant is weaker and insignificant: +1.3 pp (t = 1.4).\n**Net of costs** (mid+large long-short book): gross 7.9%/yr, Sharpe 1.21; 6.0% at 10 bp one-way, 4.0% at 20 bp, 2.1% at 30 bp. Year-by-year at 10 bp: \u22121.3%, +13.6%, +2.2%, +7.9% \u2014 i.e. most of the return came from a single year (2024).\n**DATA OBTAINABILITY:** The signal used is YoY change in quarterly EPS scaled by its own 4\u20138 quarter variability \u2014 **computable from EDGAR XBRL alone**, no IBES required.\n**IMPLICATION FOR THE APP:** The one piece of evidence that PEAD still has a pulse in large caps at the right horizon. Treat it as a hypothesis to re-test, not a result. The 2025\u201326 collapse to +0.5 pp is the number to watch. Note the internal inconsistency flagged in the source (chart commentary describing a 4\u21925.4 point gap does not reconcile with the 1.7 pp headline), which is a reason for caution.\n\n---"
+   },
+   "P3": {
+    "ref": "P3",
+    "passage_id": "R13-026",
+    "source": "research-13-practitioner-benchmarks.md",
+    "section": "PART 5: COMPETITION, CAPACITY, AND WHERE RETAIL EDGE MIGHT EXIST > 5.1 Who is on the other side",
+    "grade": "Moderate-to-Strong (large, granular, but a working paper with a self-selected sample the authors acknowledge).",
+    "text": "**CLAIM:** Retail option trades lose ~0.9% each on average including all costs \u2014 but short option positions were the profitable exception.\n\n**SOURCE:** Vincent Bogousslavsky (Boston College) & Dmitriy Muravyev (UIUC), \"An Anatomy of Retail Option Trading,\" working paper 8 Feb 2025. [WP] \u2014 https://www.brettonwoodsskiconference.com/uploads/b/f9bfc8b0-0251-11ed-a646-3dea17112d2f/An%20Anatomy%20of%20Retail%20Option%20Trading.pdf\n\n- Average option trade returns **\u22120.9%** including commissions, fees and spreads; stock trades near zero. Sample ~$15bn in trades.\n- Per trader-month: option-only traders lose ~**$547**; stock-only traders earn ~$62 (not significant).\n- **0DTE options lose ~4.7% per trade** univariately (2.3\u20133% worse than other options after controls).\n- Index/ETF options ~\u22123% vs single-stock options ~**+0.15%**.\n- **Option purchases lose ~4%. Naked option sales \u2014 only ~13% of option trades \u2014 earn ~20%.** Trader fixed effects do not explain the buyer/seller gap, so it is not a skill difference.\n- **Trade size matters: traders averaging under $200/trade lose ~3.4% per option trade vs ~1.4% for those averaging over $5,000.**\n- The average loss (\u22120.9%) is *smaller* than the typical quoted spread (3.7%), implying retail traders do get fills better than quoted \u2014 consistent with limit-order use and with the price improvement above.\n- The authors note the sample is trade-journal users and may not represent all retail.\n\n**EVIDENCE STRENGTH:** Moderate-to-Strong (large, granular, but a working paper with a self-selected sample the authors acknowledge)."
+   },
+   "P4": {
+    "ref": "P4",
+    "passage_id": "R14-050",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "SINGLE-NAME VRP VERDICT",
+    "grade": "ungraded",
+    "text": "**Verdict for the build.** Do not build a product whose thesis is \"harvest the single-name variance risk\npremium.\" The evidence does not support a positive expected net return from generic single-name premium\nselling at retail costs. Build instead a product whose thesis is **cost-and-liquidity-first contract\nselection within a narrow liquid universe**, where the richness score is a tie-breaker among contracts\nthat have already passed an exclusionary liquidity gate, and where the one differentiated, cost-surviving,\npeer-reviewed edge \u2014 the post-announcement overpricing window \u2014 is the primary timing input. Expected net\nedge should be presented to the user as \"small, uncertain, and possibly zero,\" with the tool's main value\nbeing the avoidance of documented losses (buying premium into announcements, trading illiquid contracts,\nholding short ITM calls through ex-dates) rather than the capture of a premium.\n\n---"
+   },
+   "P5": {
+    "ref": "P5",
+    "passage_id": "R05-007",
+    "source": "research-05-creator-ecosystem.md",
+    "section": "FINDINGS > A. THE STRATEGY CANON BEING SOLD",
+    "grade": "Moderate",
+    "text": "**CLAIM:** Credit spreads and iron condors are marketed as \"high probability\" income trades; the structurally negative skew (high win rate, large tail loss) is the standard critique.\n**SOURCE:** Taleb distribution concept (https://en.wikipedia.org/wiki/Taleb_distribution); Early Retirement Now, \"Another Option Strategy Failure,\" 11 September 2019 (https://earlyretirementnow.com/2019/09/11/ubs-another-option-strategy-failure/); Benzinga, \"Picking Up Pennies In Front Of A Steamroller,\" April 2024 (https://benzinga.com/z/38086212)\n**EVIDENCE TYPE:** Independent scrutiny\n**EVIDENCE STRENGTH:** Moderate\n**IMPLICATION FOR THE APP:** A 0\u2013100 score for a credit spread that is driven by win probability is actively misleading. Any score for a short-premium structure must be accompanied by **max loss, loss-to-credit ratio, and the number of consecutive wins needed to recover one max loss.** That last number is a single integer and it is the most honest thing the app can show a premium seller.\n\n---"
+   },
+   "P6": {
+    "ref": "P6",
+    "passage_id": "R14-048",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "SINGLE-NAME VRP VERDICT",
+    "grade": "ungraded",
+    "text": "- Average relative effective spread on ATM options among **S&P 500 constituents**: 6.41% calls / 5.25%\n  puts (Christoffersen et al., *RFS* 2018). Round trip \u2248 10\u201313% of premium.\n- Median relative bid-ask spread on single-name straddles: ~10%, ~12% around earnings (Xing & Zhang).\n- Retail half-spread before high-EAV announcements: ~9%, i.e. ~18% round trip (de Silva, So & Smith).\n- The brief's own figure: 8\u201320% of premium at 42\u201348 DTE.\n\nA 90-DTE ATM option carries roughly 5\u20136% of the underlying in premium. A 10% round-trip spread therefore\ncosts about 0.5\u20130.6% of the underlying. The median name's premium, scaled comparably, is of the same\norder. **The edge and the cost are the same size at the median name.** The only populations where the\nnet result is reliably positive are Goyal & Saretto's low-spread tercile (straddle 10\u22121 of 8.2% at full\nquoted spread, delta-hedged puts 1.2%) \u2014 and those are the names where the gross premium is *smallest*\n(18.0% gross versus 23.9% in the high-spread tercile).\n\n**Three further discounts must be applied before believing any of it.**"
+   }
+  },
+  "run": {
+   "run_id": "run_88ab7a0451d1",
+   "status": "ok",
+   "model_calls": 2,
+   "tool_calls": 2,
+   "cost_usd": 0.0019,
+   "returned_once": false,
+   "config": "0c79b26ca92a"
+  }
+ },
+ "saved_at": "2026-11-19T11:00:01-08:00",
+ "critic": {
+  "depends_on": {
+   "claim_id": "CL1",
+   "why": "It is the only claim. Without the earnings miss nothing points toward a lower close, because every other recorded finding carries no direction."
+  },
+  "rejected_signals_in_other_words": [],
+  "claims_that_do_not_fit": [],
+  "checks_that_are_one_problem": [
+   {
+    "checks": [
+     "T2",
+     "T3"
+    ],
+    "note": "Both come from the same fact: the thesis rests on a single finding, and that finding is graded moderate rather than primary-source."
+   },
+   {
+    "checks": [
+     "T12",
+     "C2"
+    ],
+    "note": "Both describe the active volatility regime. The first measures it on the stock; the second applies it to a strategy that sells premium."
+   },
+   {
+    "checks": [
+     "T5",
+     "C4"
+    ],
+    "note": "Both reflect the same history. The stock closed lower in fewer than half of past 30-day periods, so the historical win chance sits well below the market-implied one."
+   }
+  ],
+  "case_for": "Amazon reported earnings per share about four percent below expectations. The research on post-earnings drift finds that prices have historically kept moving in the direction of an earnings surprise for weeks afterward. The stock has barely moved since the report, so any drift has not yet played out in the price. The market-implied chance that the spread profits is 64.6%. The implied move is above the typical realized move, so the collected credit is comparatively rich.",
+  "priced_in": [
+   {
+    "claim_id": "CL1",
+    "reading": "Since the results became public, the stock is up 1.2%, which is 0.13 of a typical realized move. That is essentially no reaction, and what little there is runs opposite to the miss. The figure shows no downward repricing. That leaves room for drift, but it is equally consistent with the market treating a small miss as unimportant."
+   }
+  ],
+  "case_against": "Revenue was essentially in line, so the miss is narrow. The project's own out-of-sample work finds earnings drift small and fading: the spread between the strongest and weakest surprise groups fell to half a point over sixty days in recent years. The trade's horizon is shorter than that. Historically the stock closed lower in only about 41% of 30-day periods. The price rose slightly after the report. Volatility is elevated, and a Fed decision falls inside the window.",
+  "loss_paths": [
+   {
+    "title": "Stock rises above breakeven",
+    "text": "A close above 269.14 at expiration loses money, up to the full 1,586 above 285. Historically the stock closed higher in most 30-day periods.",
+    "grounds": [
+     "T5",
+     "C4"
+    ]
+   },
+   {
+    "title": "Large move in an active regime",
+    "text": "Recent volatility is 1.41 times its typical level, and closes have stayed inside the typical move less often than the strikes assume. The Fed decision on day 20 could deliver the upward move that hurts a short call spread.",
+    "grounds": [
+     "T12",
+     "C2",
+     "T6"
+    ]
+   },
+   {
+    "title": "In-the-money short call",
+    "text": "The 260 short call is in the money at entry with spot at 260.27. Any upward drift erodes the credit immediately, and the short leg carries early-assignment exposure.",
+    "grounds": [
+     "C8",
+     "C7"
+    ]
+   }
+  ],
+  "missing": [
+   {
+    "ref": "U1",
+    "why_it_matters": "Without the history of estimate revisions, there is no way to tell whether analysts cut forecasts after the miss. Cuts are the usual channel through which drift continues."
+   },
+   {
+    "ref": "U3",
+    "why_it_matters": "Only annual consensus is available. The quarterly expectation the miss is measured against is therefore less certain."
+   },
+   {
+    "ref": "U4",
+    "why_it_matters": "With no macro expectations, the likely market reaction to the Fed decision and the inflation report inside the window cannot be judged."
+   }
+  ],
+  "dispositions": [
+   {
+    "claim_id": "CL1",
+    "standing": "holds_in_a_narrower_form",
+    "reason": "The earnings-per-share miss is recorded, but revenue was essentially in line. Its link to a lower close within 30 days rests on drift evidence that has weakened sharply in recent years, and the price has not fallen since the report."
+   }
+  ],
+  "objections": [
+   {
+    "title": "The price has not reacted to the miss.",
+    "text": "The stock is up slightly since the report, and recent drift evidence shows the effect has nearly vanished. The single directional finding may carry little weight.",
+    "grounds": [
+     "CL1",
+     "P2"
+    ]
+   },
+   {
+    "title": "The base rate works against a lower close.",
+    "text": "The stock closed lower in only 41.4% of past 30-day periods. The historical win chance of 54.6% sits ten points below the market-implied 64.6%.",
+    "grounds": [
+     "T5",
+     "C4"
+    ]
+   },
+   {
+    "title": "The thesis rests on one moderate finding.",
+    "text": "No second, independent finding supports the direction, and the one finding there is does not meet the primary-source grade test.",
+    "grounds": [
+     "T2",
+     "T3"
+    ]
+   },
+   {
+    "title": "The structure sells premium in an active regime.",
+    "text": "The project's research finds single-name premium selling unprofitable after retail costs, and finds the loss-to-credit asymmetry is the main hazard. Here the maximum loss is 1,586 against a 914 credit, with the short leg already in the money.",
+    "grounds": [
+     "C2",
+     "C7",
+     "C8",
+     "P4",
+     "P5"
+    ]
+   },
+   {
+    "title": "A Fed decision falls inside the window.",
+    "text": "The decision on day 20 can produce a large move in either direction before expiration.",
+    "grounds": [
+     "T6",
+     "R3"
+    ]
+   }
+  ],
+  "run": {
+   "run_id": "run_d82f0fa9e64e",
+   "status": "ok",
+   "model_calls": 1,
+   "tool_calls": 0,
+   "cost_usd": 0.1037,
+   "returned_once": false,
+   "config": "eab25a0fd56a"
+  },
+  "model": "claude-opus-5-5",
+  "model_family": "Claude",
+  "same_family_as_thesis_agent": true,
+  "priced_in_figures": {
+   "CL1": {
+    "claim_id": "CL1",
+    "finding_id": "F1",
+    "since": "2026-10-29",
+    "pct": 1.2,
+    "typical_moves": 0.13,
+    "typical_move_pct": 9.1,
+    "horizon_days": 30
+   }
+  },
+  "unavailable": {
+   "U1": "estimate revision history (no source)",
+   "U2": "the time of day of the next earnings report (no source)",
+   "U3": "quarterly consensus (only annual consensus is available)",
+   "U4": "macro expectations: no source"
+  },
+  "standing_counts": {
+   "holds": 0,
+   "holds_in_a_narrower_form": 1,
+   "does_not_hold": 0
+  },
+  "check": {
+   "ok": true,
+   "failed_checks": [],
+   "returned_once": false,
+   "in_harness": true
+  }
+ }
+}

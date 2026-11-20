@@ -1,0 +1,298 @@
+{
+ "passages": {
+  "method": "chromadb (all-MiniLM-L6-v2, local)",
+  "retrieved": true,
+  "index_note": null,
+  "reason": null,
+  "relevance_bar": 0.45,
+  "topics": [
+   {
+    "id": "TP1",
+    "kind": "claim",
+    "claim_id": "CL1",
+    "text": "EPS $4.89 against $4.72 expected (+3.6%); revenue $92.28B against $90.62B expected (+1.8%). Results above estimates, reported 2026-10-28.",
+    "for": [
+     "P1"
+    ],
+    "against": [],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "stocks rise after reporting results above analyst estimates; post-earnings announcement drift from an earnings beat",
+      "opposes_query": "earnings beats already priced in; post-earnings drift has disappeared in liquid stocks, so beating estimates does not predict gains",
+      "returned": [
+       "R08-004",
+       "R08-008",
+       "R08-009",
+       "R14-040",
+       "R14-043",
+       "R18-017"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "TPS",
+    "kind": "structure",
+    "claim_id": null,
+    "text": "Bull put spread (credit): a short-premium (net credit) option strategy with defined risk on a single stock, held to expiration; whether selling option premium earns a return after trading costs",
+    "for": [
+     "P2",
+     "P3",
+     "P4"
+    ],
+    "against": [
+     "P5",
+     "P6"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "selling option premium through credit spreads earns a positive return after trading costs; defined-risk short put spreads held to expiration",
+      "opposes_query": "selling option premium through credit spreads loses money after trading costs; short-volatility strategies suffer tail losses and fail to earn net returns",
+      "returned": [
+       "R03-030",
+       "R05-007",
+       "R05-013",
+       "R10-028",
+       "R11-064",
+       "R13-026",
+       "R14-010",
+       "R14-038",
+       "R14-048",
+       "R14-060",
+       "R14-075",
+       "SPEC-031"
+      ]
+     }
+    ]
+   }
+  ],
+  "passages": {
+   "P1": {
+    "ref": "P1",
+    "passage_id": "R08-004",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 1. Post-earnings announcement drift \u2014 the original effect",
+    "grade": "Strong (for the historical effect)",
+    "text": "**CLAIM:** PEAD is the longest-surviving and best-documented directional anomaly; sorting on standardised unexpected earnings (SUE) historically produced roughly 2% abnormal return over the 60 trading days following an announcement, with drift persisting two to three quarters.\n**SOURCE:** Ball & Brown (1968), *Journal of Accounting Research*; Bernard & Thomas (1989), *Journal of Accounting Research* 27, 1\u201336; reviewed in Josef Fink, \"A Review of the Post-Earnings-Announcement Drift,\" University of Graz Working Paper 2020-04 (Nov 2020), https://static.uni-graz.at/fileadmin/sowi/Working_Paper/2020-04_Fink.pdf \u2014 **peer-reviewed originals, working-paper review**\n**EVIDENCE STRENGTH:** Strong (for the historical effect)\n**HORIZON:** Drift strongest in the first quarter after announcement; persists 2\u20133 quarters. Fink reports Bernard & Thomas at ~2% over 60 trading days, ~4% per quarter; early long/short estimates reach ~18% annualised.\n**DECAY EVIDENCE:** See finding 2 \u2014 substantial.\n**DATA OBTAINABILITY:** Excellent. SUE from a time-series model of quarterly EPS is computable **entirely from EDGAR XBRL** (`EarningsPerShareDiluted`, quarterly, 8+ quarters history). Analyst-based SUE needs IBES or a vendor. Fink notes analyst-forecast-based surprises produce *larger* drift than time-series surprises \u2014 so the free version is the weaker version.\n**IMPLICATION FOR THE APP:** The 60-day drift window maps cleanly onto 60\u201390 DTE contracts. This is the single best horizon fit in the entire literature for this product. The problem is entirely whether it still exists.\n\n---"
+   },
+   "P2": {
+    "ref": "P2",
+    "passage_id": "R14-010",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "PART 1 \u2014 IS THERE A HARVESTABLE VARIANCE RISK PREMIUM IN SINGLE NAMES AT ALL? > 1.4 Does it survive single-name transaction costs? \u2014 the decisive evidence",
+    "grade": "Strong. Peer-reviewed, RFS, largest and most recent sample with explicit cost",
+    "text": "**CLAIM:** The best modern machine-learning cross-section of equity option returns earns 2.63%/month\ngross but 1.33% at a 15% effective spread and 0.47% at 25%, and **long-dated options (over 90 days)\nbecome insignificant or negative at a 25% effective spread while short-dated ones (\u226490 days) survive.**\n\n**SOURCE:** Turan G. Bali, Heiner Beckmeyer, Mathis Moerke & Florian Weigert, \"Option Return\nPredictability with Machine Learning and Big Data,\" *Review of Financial Studies*, 2023 (36: 3548\u20133602);\nCFR Working Paper 21-08. **[PR]**\nhttps://academic.oup.com/rfs/article/36/9/3548/7056660\nSample: OptionMetrics, Jan 1996 \u2013 Dec 2020; 4,932,372 options on 7,046 underlyings; 12,129,844\noption-month observations; out-of-sample 2003\u20132020. Nonlinear ensemble H-L Sharpe 2.06 gross,\n1.17 at 15%, 0.43 at 25%. At 25% the strategy is zero or slightly negative in 2016\u20132019. Short-term ATM\noptions have the highest risk-adjusted return (Sharpe 1.34) at 25%. Sample covers about 83% of total US\nequity market capitalisation with an average size percentile of 72.\n\n**EVIDENCE STRENGTH:** Strong. Peer-reviewed, RFS, largest and most recent sample with explicit cost\ngrids.\n\n**IMPLICATION FOR THE BUILD:** Two consequences, both uncomfortable for the brief's stated horizon.\nFirst, **the maturity evidence cuts against the long end of the 42\u2013180 DTE target range.** The only\npeer-reviewed study that splits option-return predictability by maturity and nets out costs finds the\nover-90-day bucket does not survive a 25% effective spread. The 42\u201390 DTE sub-band is materially better\nsupported by evidence than 90\u2013180 DTE, and the build should either concentrate there or explicitly\nacknowledge that the 90\u2013180 band is an evidence-free extrapolation. Second, the strategy was flat to\nnegative in 2016\u20132019 at 25% costs \u2014 the decay concern is live in single names even without a formal\nbreak test.\n\n---"
+   },
+   "P3": {
+    "ref": "P3",
+    "passage_id": "R13-026",
+    "source": "research-13-practitioner-benchmarks.md",
+    "section": "PART 5: COMPETITION, CAPACITY, AND WHERE RETAIL EDGE MIGHT EXIST > 5.1 Who is on the other side",
+    "grade": "Moderate-to-Strong (large, granular, but a working paper with a self-selected sample the authors acknowledge).",
+    "text": "**CLAIM:** Retail option trades lose ~0.9% each on average including all costs \u2014 but short option positions were the profitable exception.\n\n**SOURCE:** Vincent Bogousslavsky (Boston College) & Dmitriy Muravyev (UIUC), \"An Anatomy of Retail Option Trading,\" working paper 8 Feb 2025. [WP] \u2014 https://www.brettonwoodsskiconference.com/uploads/b/f9bfc8b0-0251-11ed-a646-3dea17112d2f/An%20Anatomy%20of%20Retail%20Option%20Trading.pdf\n\n- Average option trade returns **\u22120.9%** including commissions, fees and spreads; stock trades near zero. Sample ~$15bn in trades.\n- Per trader-month: option-only traders lose ~**$547**; stock-only traders earn ~$62 (not significant).\n- **0DTE options lose ~4.7% per trade** univariately (2.3\u20133% worse than other options after controls).\n- Index/ETF options ~\u22123% vs single-stock options ~**+0.15%**.\n- **Option purchases lose ~4%. Naked option sales \u2014 only ~13% of option trades \u2014 earn ~20%.** Trader fixed effects do not explain the buyer/seller gap, so it is not a skill difference.\n- **Trade size matters: traders averaging under $200/trade lose ~3.4% per option trade vs ~1.4% for those averaging over $5,000.**\n- The average loss (\u22120.9%) is *smaller* than the typical quoted spread (3.7%), implying retail traders do get fills better than quoted \u2014 consistent with limit-order use and with the price improvement above.\n- The authors note the sample is trade-journal users and may not represent all retail.\n\n**EVIDENCE STRENGTH:** Moderate-to-Strong (large, granular, but a working paper with a self-selected sample the authors acknowledge)."
+   },
+   "P4": {
+    "ref": "P4",
+    "passage_id": "R14-060",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "POST-EARNINGS OPPORTUNITY",
+    "grade": "ungraded",
+    "text": "1. **Chung & Louis (*Journal of Empirical Finance* 2017, peer-reviewed):** straddles bought *after*\n   announcements return *more negative* than straddles in firms with no nearby announcement. Their stated\n   conclusion is that post-announcement options appear **expensive**. Long-short (buy before / sell after)\n   = 14.4% over one month; combined with the HV-IV spread = 29.2% versus 13.7% for the spread alone; and\n   executed at the offer and sold at the bid the two-way strategy still returns **14.9%** (HV-IV version)\n   and **9.4%** (prior-month vol version). Mechanism: traders overestimate volatility after announcements,\n   especially following volatile periods \u2014 recency bias.\n2. **de Silva, So & Smith (working paper 2024):** high-EAV straddles underperform low-EAV straddles by\n   ~11% on announcement day **plus a further ~9% over the following 10 days**, with option prices\n   continuing to decay and **no reversal**. The post-announcement decay is documented as a continuation.\n3. **Xing & Zhang (working paper 2013):** ATM IV runs 49.3% at day \u221220 \u2192 53.2% at day \u22121 \u2192 49.1% at day\n   +1. The crush restores the baseline; it does not undershoot it. This independently **rules out the\n   \"post-earnings IV is cheap\" hypothesis** while being consistent with post-earnings IV remaining above\n   subsequent realised vol."
+   },
+   "P5": {
+    "ref": "P5",
+    "passage_id": "R05-007",
+    "source": "research-05-creator-ecosystem.md",
+    "section": "FINDINGS > A. THE STRATEGY CANON BEING SOLD",
+    "grade": "Moderate",
+    "text": "**CLAIM:** Credit spreads and iron condors are marketed as \"high probability\" income trades; the structurally negative skew (high win rate, large tail loss) is the standard critique.\n**SOURCE:** Taleb distribution concept (https://en.wikipedia.org/wiki/Taleb_distribution); Early Retirement Now, \"Another Option Strategy Failure,\" 11 September 2019 (https://earlyretirementnow.com/2019/09/11/ubs-another-option-strategy-failure/); Benzinga, \"Picking Up Pennies In Front Of A Steamroller,\" April 2024 (https://benzinga.com/z/38086212)\n**EVIDENCE TYPE:** Independent scrutiny\n**EVIDENCE STRENGTH:** Moderate\n**IMPLICATION FOR THE APP:** A 0\u2013100 score for a credit spread that is driven by win probability is actively misleading. Any score for a short-premium structure must be accompanied by **max loss, loss-to-credit ratio, and the number of consecutive wins needed to recover one max loss.** That last number is a single integer and it is the most honest thing the app can show a premium seller.\n\n---"
+   },
+   "P6": {
+    "ref": "P6",
+    "passage_id": "R14-048",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "SINGLE-NAME VRP VERDICT",
+    "grade": "ungraded",
+    "text": "- Average relative effective spread on ATM options among **S&P 500 constituents**: 6.41% calls / 5.25%\n  puts (Christoffersen et al., *RFS* 2018). Round trip \u2248 10\u201313% of premium.\n- Median relative bid-ask spread on single-name straddles: ~10%, ~12% around earnings (Xing & Zhang).\n- Retail half-spread before high-EAV announcements: ~9%, i.e. ~18% round trip (de Silva, So & Smith).\n- The brief's own figure: 8\u201320% of premium at 42\u201348 DTE.\n\nA 90-DTE ATM option carries roughly 5\u20136% of the underlying in premium. A 10% round-trip spread therefore\ncosts about 0.5\u20130.6% of the underlying. The median name's premium, scaled comparably, is of the same\norder. **The edge and the cost are the same size at the median name.** The only populations where the\nnet result is reliably positive are Goyal & Saretto's low-spread tercile (straddle 10\u22121 of 8.2% at full\nquoted spread, delta-hedged puts 1.2%) \u2014 and those are the names where the gross premium is *smallest*\n(18.0% gross versus 23.9% in the high-spread tercile).\n\n**Three further discounts must be applied before believing any of it.**"
+   }
+  },
+  "run": {
+   "run_id": "run_7bd1018ede30",
+   "status": "ok",
+   "model_calls": 3,
+   "tool_calls": 2,
+   "cost_usd": 0.003,
+   "returned_once": false,
+   "config": "0c79b26ca92a"
+  }
+ },
+ "saved_at": "2026-11-19T11:00:01-08:00",
+ "critic": {
+  "depends_on": {
+   "claim_id": "CL1",
+   "why": "It is the only claim. The earnings beat is the sole finding carrying a direction, so removing it leaves no directional case at all. The cloud, segment and dividend findings carry no direction."
+  },
+  "rejected_signals_in_other_words": [],
+  "claims_that_do_not_fit": [],
+  "checks_that_are_one_problem": [
+   {
+    "checks": [
+     "T2",
+     "T3"
+    ],
+    "note": "Both describe the same thin base: the thesis rests on one finding, and that finding is graded moderate rather than primary-source."
+   },
+   {
+    "checks": [
+     "T12",
+     "C2",
+     "C5"
+    ],
+    "note": "All three describe the same active volatility regime. Recent volatility runs 1.4 times typical and the implied move is 1.57 times the typical move, which works against a premium seller."
+   }
+  ],
+  "case_for": "Microsoft beat both earnings and revenue estimates. Cloud revenue grew 30% and Azure grew 48%. Historical research finds that prices tend to drift in the direction of an earnings surprise for weeks afterward. The stock closed higher in about 58% of past 30-day periods. The spread breaks even near 490.68, roughly 2.3% below spot. It keeps its full credit even if the price only holds steady. The historical win rate for this structure is put at 73.7%. Short single-stock option sellers were a profitable group in one retail study.",
+  "priced_in": [
+   {
+    "claim_id": "CL1",
+    "reading": "The stock is down 2.5% since the beat was reported, which is about 0.4 typical moves. The market did not reward the beat. The decline is small relative to normal swings, so it reads as an indifferent reception, not a strong rejection."
+   }
+  ],
+  "case_against": "The stock has fallen since the beat, so the good news has not carried the price. The options market implies a 57.3% chance of profit, well below the historical 73.7%. It is also pricing a move about 1.57 times the typical move. Volatility is elevated and the volatility index is inverted. Technology fell nearly 12% in a month, and a Fed decision falls inside the holding period. The short strike sits barely below spot. Credit spreads carry a high win rate but a large tail loss.",
+  "loss_paths": [
+   {
+    "title": "Macro shock around the Fed decision",
+    "text": "The December 9 Fed decision and the jobs and inflation releases fall inside the holding period. A drop of a little over 2% from 502.22 puts the close below the 490.68 breakeven.",
+    "grounds": [
+     "T6",
+     "R4"
+    ]
+   },
+   {
+    "title": "Larger-than-typical move in an active regime",
+    "text": "With volatility running 1.4 times its typical level, closes stayed inside the typical move only 59 to 62% of the time. The implied move of 9.6% exceeds the distance to both strikes, so a full $2,067.50 loss is within the priced range.",
+    "grounds": [
+     "T12",
+     "C5",
+     "C2"
+    ]
+   },
+   {
+    "title": "Dividend and costs eroding the cushion",
+    "text": "The $0.98 ex-dividend on November 19 lowers the stock price toward the 500 short strike. Estimated slippage is 4.56% of the credit collected, and a single loss erases more than two full wins.",
+    "grounds": [
+     "C8",
+     "C7"
+    ]
+   }
+  ],
+  "missing": [
+   {
+    "ref": "U1",
+    "why_it_matters": "Without estimate revision history, it is unknown whether analysts raised or cut forecasts after the beat. That would show whether the surprise is likely to drift."
+   },
+   {
+    "ref": "U3",
+    "why_it_matters": "Only annual consensus is available, so the size and source of the quarterly beat cannot be confirmed against a quarterly consensus."
+   },
+   {
+    "ref": "U5",
+    "why_it_matters": "Management's discussion would show forward commentary. No guidance figure exists in the evidence."
+   }
+  ],
+  "dispositions": [
+   {
+    "claim_id": "CL1",
+    "standing": "holds_in_a_narrower_form",
+    "reason": "The beat is reported, but its finding is graded moderate. The price has since declined, and research notes that the freely computable surprise measure produces weaker drift. It supports a modest tilt, not a firm direction."
+   }
+  ],
+  "objections": [
+   {
+    "title": "The market did not reward the beat.",
+    "text": "The price has fallen 2.5% since the report, and the sector fell sharply over the same month. The beat has not translated into price strength.",
+    "grounds": [
+     "CL1",
+     "R1"
+    ]
+   },
+   {
+    "title": "The thesis rests on one moderate finding.",
+    "text": "Only one finding carries a direction, and it does not meet the primary-source grade test.",
+    "grounds": [
+     "T2",
+     "T3"
+    ]
+   },
+   {
+    "title": "The volatility regime works against a premium seller.",
+    "text": "The implied move is well above the typical move, and the active regime has historically produced moves outside the typical range more often than expected.",
+    "grounds": [
+     "T12",
+     "C2",
+     "C5",
+     "R3"
+    ]
+   },
+   {
+    "title": "The two win-rate estimates diverge.",
+    "text": "The historical estimate is 73.7% and the market-implied estimate is 57.3%. The short strike sits about half a percent below spot.",
+    "grounds": [
+     "C4"
+    ]
+   },
+   {
+    "title": "The loss-to-credit skew and trading costs weigh on the structure.",
+    "text": "The maximum loss is more than twice the credit. Research flags this negative skew and notes that costs on single-name premium are about the same size as the edge.",
+    "grounds": [
+     "C7",
+     "P5",
+     "P6"
+    ]
+   }
+  ],
+  "run": {
+   "run_id": "run_edb91f3eac52",
+   "status": "ok",
+   "model_calls": 1,
+   "tool_calls": 0,
+   "cost_usd": 0.0984,
+   "returned_once": false,
+   "config": "eab25a0fd56a"
+  },
+  "model": "claude-opus-5-5",
+  "model_family": "Claude",
+  "same_family_as_thesis_agent": true,
+  "priced_in_figures": {
+   "CL1": {
+    "claim_id": "CL1",
+    "finding_id": "F1",
+    "since": "2026-10-28",
+    "pct": -2.5,
+    "typical_moves": 0.4,
+    "typical_move_pct": 6.3,
+    "horizon_days": 30
+   }
+  },
+  "unavailable": {
+   "U1": "estimate revision history (no source)",
+   "U2": "the time of day of the next earnings report (no source)",
+   "U3": "quarterly consensus (only annual consensus is available)",
+   "U4": "macro expectations: no source",
+   "U5": "Management discussion (MD&A) of most recent 10-Q, 0001193125-26-436133"
+  },
+  "standing_counts": {
+   "holds": 0,
+   "holds_in_a_narrower_form": 1,
+   "does_not_hold": 0
+  },
+  "check": {
+   "ok": true,
+   "failed_checks": [],
+   "returned_once": false,
+   "in_harness": true
+  }
+ }
+}

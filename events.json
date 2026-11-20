@@ -1,0 +1,20 @@
+{
+ "AMZN": {
+  "symbol": "AMZN",
+  "pays_dividend": false,
+  "next_ex_dividend_date": null,
+  "next_ex_dividend_note": "no future ex-dividend date has been declared yet"
+ },
+ "MSFT": {
+  "symbol": "MSFT",
+  "pays_dividend": true,
+  "next_ex_dividend_date": "2026-11-19",
+  "next_ex_dividend_note": null
+ },
+ "NVDA": {
+  "symbol": "NVDA",
+  "pays_dividend": true,
+  "next_ex_dividend_date": "2026-12-02",
+  "next_ex_dividend_note": null
+ }
+}

@@ -1,0 +1,310 @@
+{
+ "passages": {
+  "method": "chromadb (all-MiniLM-L6-v2, local)",
+  "retrieved": true,
+  "index_note": null,
+  "reason": null,
+  "relevance_bar": 0.45,
+  "topics": [
+   {
+    "id": "TP1",
+    "kind": "claim",
+    "claim_id": "CL1",
+    "text": "EPS $4.89 against $4.72 expected (+3.6%); revenue $92.28B against $90.62B expected (+1.8%). Results above estimates, reported 2026-10-28.",
+    "for": [
+     "P1"
+    ],
+    "against": [
+     "P2"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "stocks rise after earnings beat estimates; post-earnings announcement drift as a reason for a higher price",
+      "opposes_query": "post-earnings drift has disappeared in liquid stocks; an earnings beat is already priced in and does not predict returns",
+      "returned": [
+       "R08-004",
+       "R08-007",
+       "R08-009",
+       "R14-039",
+       "R14-040",
+       "R14-042",
+       "R18-017"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "TPS",
+    "kind": "structure",
+    "claim_id": null,
+    "text": "Long call: buying options (a net debit, defined risk) on a single stock to express a directional view; whether bought options pay after trading costs and time decay",
+    "for": [
+     "P3"
+    ],
+    "against": [
+     "P4",
+     "P5",
+     "P6"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "buying single-stock call options to express a bullish view produces positive returns after costs",
+      "opposes_query": "long call option buyers lose money after trading costs and time decay; bought options underperform on average",
+      "returned": [
+       "R03-005",
+       "R03-022",
+       "R03-030",
+       "R03-031",
+       "R03-059",
+       "R13-026",
+       "R14-003",
+       "R14-010",
+       "R15-010",
+       "R15-019",
+       "R15-040"
+      ]
+     }
+    ]
+   }
+  ],
+  "passages": {
+   "P1": {
+    "ref": "P1",
+    "passage_id": "R08-004",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 1. Post-earnings announcement drift \u2014 the original effect",
+    "grade": "Strong (for the historical effect)",
+    "text": "**CLAIM:** PEAD is the longest-surviving and best-documented directional anomaly; sorting on standardised unexpected earnings (SUE) historically produced roughly 2% abnormal return over the 60 trading days following an announcement, with drift persisting two to three quarters.\n**SOURCE:** Ball & Brown (1968), *Journal of Accounting Research*; Bernard & Thomas (1989), *Journal of Accounting Research* 27, 1\u201336; reviewed in Josef Fink, \"A Review of the Post-Earnings-Announcement Drift,\" University of Graz Working Paper 2020-04 (Nov 2020), https://static.uni-graz.at/fileadmin/sowi/Working_Paper/2020-04_Fink.pdf \u2014 **peer-reviewed originals, working-paper review**\n**EVIDENCE STRENGTH:** Strong (for the historical effect)\n**HORIZON:** Drift strongest in the first quarter after announcement; persists 2\u20133 quarters. Fink reports Bernard & Thomas at ~2% over 60 trading days, ~4% per quarter; early long/short estimates reach ~18% annualised.\n**DECAY EVIDENCE:** See finding 2 \u2014 substantial.\n**DATA OBTAINABILITY:** Excellent. SUE from a time-series model of quarterly EPS is computable **entirely from EDGAR XBRL** (`EarningsPerShareDiluted`, quarterly, 8+ quarters history). Analyst-based SUE needs IBES or a vendor. Fink notes analyst-forecast-based surprises produce *larger* drift than time-series surprises \u2014 so the free version is the weaker version.\n**IMPLICATION FOR THE APP:** The 60-day drift window maps cleanly onto 60\u201390 DTE contracts. This is the single best horizon fit in the entire literature for this product. The problem is entirely whether it still exists.\n\n---"
+   },
+   "P2": {
+    "ref": "P2",
+    "passage_id": "R08-007",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 3. PEAD out of sample, 2023\u20132026",
+    "grade": "Weak (methodologically transparent but unrefereed, <4 years, one regime, self-disclosed probable survivorship bias)",
+    "text": "**CLAIM:** An independent out-of-sample test over 43,111 announcements from Jan 2023 to Oct 2026 finds PEAD still present in large caps but small and fading fast.\n**SOURCE:** Gaurav Gupta, \"Is Post-Earnings Drift Still Tradable? 43,000 Announcements, 2023\u20132026,\" https://guptagaurav.info/articles/earnings-drift \u2014 **practitioner blog post, not peer-reviewed; author discloses AI assistance in the analysis**\n**EVIDENCE STRENGTH:** Weak (methodologically transparent but unrefereed, <4 years, one regime, self-disclosed probable survivorship bias)\n**HORIZON:** Position formed at close of day +1, drift measured days +2 to +61 \u2014 i.e. ~3 months. Direct fit to 60\u201390 DTE.\n**DECAY EVIDENCE:** Top-minus-bottom SUE quintile spread, all sizes: +1.7 pp over 60 days (t = 4.2). Large caps (>$10bn): +2.0 pp (t = 3.4). Mid: +1.4 pp (t = 2.9). Small: +1.1 pp (t = 2.1). **But the spread is +2.6 pp for 2023\u201324 announcements versus +0.5 pp for 2025\u201326.** The earnings-announcement-return (EAR) variant is weaker and insignificant: +1.3 pp (t = 1.4).\n**Net of costs** (mid+large long-short book): gross 7.9%/yr, Sharpe 1.21; 6.0% at 10 bp one-way, 4.0% at 20 bp, 2.1% at 30 bp. Year-by-year at 10 bp: \u22121.3%, +13.6%, +2.2%, +7.9% \u2014 i.e. most of the return came from a single year (2024).\n**DATA OBTAINABILITY:** The signal used is YoY change in quarterly EPS scaled by its own 4\u20138 quarter variability \u2014 **computable from EDGAR XBRL alone**, no IBES required.\n**IMPLICATION FOR THE APP:** The one piece of evidence that PEAD still has a pulse in large caps at the right horizon. Treat it as a hypothesis to re-test, not a result. The 2025\u201326 collapse to +0.5 pp is the number to watch. Note the internal inconsistency flagged in the source (chart commentary describing a 4\u21925.4 point gap does not reconcile with the 1.7 pp headline), which is a reason for caution.\n\n---"
+   },
+   "P3": {
+    "ref": "P3",
+    "passage_id": "R14-039",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "PART 6 \u2014 EARNINGS-CYCLE STRUCTURE AT 42\u2013180 DTE > 6.3 The post-earnings window \u2014 positive evidence, in the opposite direction to the brief's hypothesis",
+    "grade": "Strong for the direction (peer-reviewed, explicit offer/bid execution);",
+    "text": "**CLAIM:** Straddles bought *after* earnings announcements earn returns more negative than straddles in\nfirms with no nearby announcement; straddles bought *before* announcements earn about +5.1%; the\nlong-short portfolio earns about 14.4% over a one-month holding period; combining the announcement-timing\nsignal with the historical-minus-implied volatility spread raises the hedge return to 29.2% against 13.7%\nfor the volatility spread alone; and executed at the offer and sold at the bid the two-way strategy still\nreturns about 14.9% (HV-IV version) and about 9.4% (prior-month volatility version).\n\n**SOURCE:** Sung Gon Chung & Henock Louis, \"Earnings announcements and option returns,\" *Journal of\nEmpirical Finance*, 2017, 40: 220\u2013235. DOI: 10.1016/j.jempfin.2016.07.010 **[PR]**\nThe authors attribute the pattern to traders underestimating volatility before announcements (especially\nafter calm periods) and overestimating it after announcements (especially after volatile periods), and\nsuggest recency bias as a mechanism. Their stated conclusion is that **post-announcement options appear\nexpensive** and pre-announcement options appear cheap. They also note single-factor strategies \u2014 the\nvolatility spread alone or announcement timing alone \u2014 shrink to small returns after costs.\n\n**EVIDENCE STRENGTH:** Strong for the direction (peer-reviewed, explicit offer/bid execution);\nModerate for magnitude in a retail context, because the headline figures are long-short and the\ncost-surviving versions are two-way strategies combining both legs."
+   },
+   "P4": {
+    "ref": "P4",
+    "passage_id": "R03-031",
+    "source": "research-03-options-pricing-flow.md",
+    "section": "4. MARKET MICROSTRUCTURE REALITIES FOR RETAIL",
+    "grade": "Moderate (sample of ~5,182 traders using a trading journal \u2014 likely more active and sophisticated than typical retail, which the authors note).",
+    "text": "**CLAIM:** Retail option trades average \u22120.9% per trade, option purchases \u22123.95%, 0DTE trades \u22124.6%, with median maturity collapsing from four days to one day between 2020 and 2022.\n**SOURCE:** Vincent Bogousslavsky & Dmitriy Muravyev, \"An Anatomy of Retail Option Trading,\" 29 Aug 2024. https://www.lsu.edu/business/files/event-files/2025-finance-mardi-gras/retail_option_trading_v2.pdf **[WP]**\n**EVIDENCE STRENGTH:** Moderate (sample of ~5,182 traders using a trading journal \u2014 likely more active and sophisticated than typical retail, which the authors note).\n**Details:** Average option trade \u22120.9% (t = \u22123.57) including commissions and spread; purchases \u22123.95%; **naked option sales +20%**; stock trades roughly flat (+0.11%). Small traders lose most per option trade (\u22123.4%); multi-day traders \u22120.9%. 0DTE \u2248 23% of option trades, \u22124.6% average. SPY and SPX \u2248 26% of retail option trades; top ten underlyings \u2248 60%. Median moneyness ~0.97\u20130.98 (ATM to slightly OTM). The authors note typical option spreads of 5\u201310%+ while observed losses are much smaller, inferring substantial limit-order use.\n**IMPLICATION FOR THE APP:** The asymmetry between purchases (\u22123.95%) and naked sales (+20%) in the same sample is the clearest statement of the structural headwind on long premium. It also confirms the Bakshi\u2013Crosby\u2013Gao direction with real retail trades rather than synthetic portfolios."
+   },
+   "P5": {
+    "ref": "P5",
+    "passage_id": "R14-003",
+    "source": "research-14-singlename-vrp-universe.md",
+    "section": "PART 1 \u2014 IS THERE A HARVESTABLE VARIANCE RISK PREMIUM IN SINGLE NAMES AT ALL? > 1.2 The large-sample picture \u2014 and it is genuinely conflicting",
+    "grade": "Strong. Largest sample in the literature, peer-reviewed in a top-three journal.",
+    "text": "**CLAIM:** Across roughly 6,000 underlying stocks over 1996\u20132009, the mean delta-hedged call gain held\nto maturity (~50 days) was \u22121.13% of the initial position (median \u22121.29%), with 78% of stocks showing\nnegative average call returns, 32% significantly negative, and only about 1% significantly positive.\n\n**SOURCE:** Jie Cao & Bing Han, \"Cross section of option returns and idiosyncratic stock volatility,\"\n*Journal of Financial Economics*, 2013 (108: 231\u2013249). **[PR]**\nhttps://www-2.rotman.utoronto.ca/facbios/file/Han_JFE_published.pdf\nSample: OptionMetrics, Jan 1996 \u2013 Oct 2009; 6,141 call underlyings / 6,065 put underlyings; ~1,514\nstocks per month; 213,640 call and 199,198 put observations.\n\n**Cross-sectional dispersion (the central question of this strand), stock-level mean call gains:**\n\n| Percentile | 10th | 25th | 50th | 75th | 90th |\n|---|---|---|---|---|---|\n| Mean delta-hedged call gain | \u22123.75% | \u22121.85% | \u22120.77% | \u22120.08% | +0.77% |\n\n**EVIDENCE STRENGTH:** Strong. Largest sample in the literature, peer-reviewed in a top-three journal.\n\n**IMPLICATION FOR THE BUILD:** This is the most important table in the strand. Read from the seller's\nside, the median name hands a premium-seller +0.77% of the hedged position per ~50 days, the 25th\npercentile name +1.85%, and the 10th percentile name +3.75%. **But the top quartile of names pay the\nseller essentially nothing (+0.08%) and the top decile pay negative (\u22120.77%).** So: (a) a premium does\nexist on average; (b) it is small at the median; (c) roughly a quarter of the optionable universe is\nnot worth selling at any cost level. Selection is not an optimisation, it is the whole strategy.\n\n---"
+   },
+   "P6": {
+    "ref": "P6",
+    "passage_id": "R03-030",
+    "source": "research-03-options-pricing-flow.md",
+    "section": "4. MARKET MICROSTRUCTURE REALITIES FOR RETAIL",
+    "grade": "Strong.",
+    "text": "**CLAIM:** Retail option traders lose 5\u20139% of their option investment around earnings on average, and 10\u201314% for high-expected-announcement-volatility events, with aggregate losses \u2248$3bn.\n**SOURCE:** Tim de Silva, Eric C. So & Kevin Smith, \"Losing is Optional: Retail Option Trading and Expected Announcement Volatility,\" *Review of Finance* 30, 2026, pp. 489\u2013535 (online Oct 2025). https://www.timdesilva.me/files/papers/losing_optional.pdf **[PEER]**\n**EVIDENCE STRENGTH:** Strong.\n**Details:** Nasdaq and PHLX clientele-split trade data matched to 32,758 US quarterly announcements, 2010\u20132021. Retail buys ATM calls in the days before high-EAV announcements; media coverage appears to drive the attention. Market makers absorb the demand; retail purchases raise option-implied variances by **~40%** for top-quintile retail buying. Three loss channels: (1) options overpriced relative to subsequent realized vol \u2014 straddles underperform by **~11%** on high-EAV announcement days vs low-EAV and a further **~9%** over the next 10 days, with no reversal; (2) wide pre-announcement spreads costing **~9%** extra on a half-spread assumption; (3) slow closing of losers consistent with the disposition effect. Retail option dollar volume rose from ~$20bn (2010) to ~$240bn (2020). The authors attribute the behaviour to behavioural error rather than hedging, lottery preference, or private information. Transaction-cost estimates assume hold-to-maturity and half-spread, so they are **lower bounds**.\n**IMPLICATION FOR THE APP:** Devastating and specific. \"News catalyst\" is one of the app's four named selection inputs, and the single best-documented systematic retail loss in the options literature is *buying options into a known catalyst*. Retail demand itself inflates the IV by ~40%, and the loss is three-part: overpricing, spread, and failure to exit. If the app ranks contracts higher because an earnings catalyst is approaching, it is mechanically steering users into the configuration with the largest measured retail loss in the literature. The defensible version of a catalyst input is **negative-signed for long premium** and accompanied by an IV-crush warning."
+   }
+  },
+  "run": {
+   "run_id": "run_333bd3dc3f8b",
+   "status": "ok",
+   "model_calls": 2,
+   "tool_calls": 2,
+   "cost_usd": 0.0019,
+   "returned_once": false,
+   "config": "0c79b26ca92a"
+  }
+ },
+ "saved_at": "2026-11-19T11:00:01-08:00",
+ "critic": {
+  "depends_on": {
+   "claim_id": "CL1",
+   "why": "It is the only claim, and the only finding that carries a direction. Without the earnings beat, nothing points toward a higher close. The other findings carry no direction."
+  },
+  "rejected_signals_in_other_words": [],
+  "claims_that_do_not_fit": [],
+  "checks_that_are_one_problem": [
+   {
+    "checks": [
+     "T2",
+     "T3"
+    ],
+    "note": "Both flags describe the same weakness: the thesis rests on one earnings-beat finding, and that finding is graded moderate rather than primary-source."
+   },
+   {
+    "checks": [
+     "C1",
+     "C10"
+    ],
+    "note": "Both flags say the chosen 500 call can lose even if the stock closes higher. The breakeven sits well above spot, so the strike fits the thesis less well than the top-ranked candidate."
+   },
+   {
+    "checks": [
+     "C5",
+     "T12"
+    ],
+    "note": "Both flags reflect an elevated-volatility backdrop. Recent volatility is above its typical level, and the implied move is well above the typical realized move, so the premium paid is large."
+   }
+  ],
+  "case_for": "Microsoft beat both earnings and revenue estimates. The surrounding quarter showed strong cloud growth and a large rise in contracted future revenue. No recorded finding points the other way. Historically the stock closed higher in about 58% of 30-day periods. Post-earnings drift has long been documented as persisting after positive surprises. The next earnings report falls after expiration, so no company report can interrupt the window. The stock also held up far better than the technology sector over three months.",
+  "priced_in": [
+   {
+    "claim_id": "CL1",
+    "reading": "Since the beat became public, the stock has fallen 2.5%, which is 0.4 typical realized moves. The market has not rewarded the beat; the price moved against it. The size of that move is small relative to normal swings, so it reads as no follow-through rather than a decisive rejection."
+   }
+  ],
+  "case_against": "The stock has drifted down since the beat, so the market did not reward it. Recent research finds post-earnings drift in large caps has faded to almost nothing in 2025 and 2026. The thesis rests on a single moderately graded finding. A Fed decision falls inside the window, during an inverted, elevated volatility regime. Options bought after earnings tend to be overpriced. The call needs roughly a 3.8% rise just to break even.",
+  "loss_paths": [
+   {
+    "title": "Higher close, below breakeven",
+    "text": "The stock can close above today's price yet below $521.40 at expiration. The call then loses part or all of its $2,140 cost. Only 56.3% of past higher-close periods were profitable for this strike.",
+    "grounds": [
+     "C1",
+     "C10"
+    ]
+   },
+   {
+    "title": "Paying an inflated implied move",
+    "text": "The implied move of 9.6% is 1.57 times the typical realized move. If the stock moves a normal amount, the call loses value as time passes and implied volatility settles.",
+    "grounds": [
+     "C5",
+     "T12"
+    ]
+   },
+   {
+    "title": "Fed decision shock",
+    "text": "The 9 December FOMC decision lands on day 20 of the hold. A hawkish surprise in an already falling tech sector could push the stock down before expiration.",
+    "grounds": [
+     "T6",
+     "R1",
+     "R3"
+    ]
+   }
+  ],
+  "missing": [
+   {
+    "ref": "U1",
+    "why_it_matters": "Without the estimate revision history, there is no way to see whether analysts raised forecasts after the beat. Rising forecasts are what would sustain any drift."
+   },
+   {
+    "ref": "U3",
+    "why_it_matters": "Without quarterly consensus, the size of the surprise against current expectations cannot be confirmed independently, and the next quarter's bar cannot be judged."
+   },
+   {
+    "ref": "U5",
+    "why_it_matters": "The management discussion could carry forward commentary. The release says guidance was given only on the call and was not quoted."
+   },
+   {
+    "ref": "U4",
+    "why_it_matters": "Without macro expectations, there is no gauge of how the Fed decision and data releases inside the window might surprise."
+   }
+  ],
+  "dispositions": [
+   {
+    "claim_id": "CL1",
+    "standing": "holds_in_a_narrower_form",
+    "reason": "The beat itself is recorded, and the filed earnings figure matches. As support for a higher close in 30 days it is weaker than stated: the price has slipped since the report, and recent evidence shows post-earnings drift has largely faded."
+   }
+  ],
+  "objections": [
+   {
+    "title": "The whole thesis rests on one moderately graded finding.",
+    "text": "No second, independent finding supports a higher close. The one that does is not graded as a primary source.",
+    "grounds": [
+     "T2",
+     "T3",
+     "CL1"
+    ]
+   },
+   {
+    "title": "The market has already moved against the beat.",
+    "text": "The stock is down 2.5% since the results. That is small in typical-move terms, but it is the opposite of follow-through.",
+    "grounds": [
+     "CL1"
+    ]
+   },
+   {
+    "title": "Post-earnings drift appears to have faded recently.",
+    "text": "Recent out-of-sample work shows the large-cap drift spread falling to about half a point for 2025 to 2026 announcements, measured over about 60 days rather than 30. That evidence is itself weakly graded.",
+    "grounds": [
+     "P2",
+     "P1"
+    ]
+   },
+   {
+    "title": "The option is expensive relative to normal movement.",
+    "text": "The implied move is well above the typical realized move. Research finds options bought after announcements are overpriced and retail option purchases lose on average. A correct direction can still lose money.",
+    "grounds": [
+     "C5",
+     "C1",
+     "P3",
+     "P4"
+    ]
+   },
+   {
+    "title": "A scheduled Fed decision sits inside the hold.",
+    "text": "The 9 December decision and several data releases fall before expiration. Volatility is elevated and the near-term curve is inverted.",
+    "grounds": [
+     "T6",
+     "R3",
+     "R4"
+    ]
+   }
+  ],
+  "run": {
+   "run_id": "run_c9f52ff0b44c",
+   "status": "ok",
+   "model_calls": 1,
+   "tool_calls": 0,
+   "cost_usd": 0.1092,
+   "returned_once": false,
+   "config": "eab25a0fd56a"
+  },
+  "model": "claude-opus-5-5",
+  "model_family": "Claude",
+  "same_family_as_thesis_agent": true,
+  "priced_in_figures": {
+   "CL1": {
+    "claim_id": "CL1",
+    "finding_id": "F1",
+    "since": "2026-10-28",
+    "pct": -2.5,
+    "typical_moves": 0.4,
+    "typical_move_pct": 6.3,
+    "horizon_days": 30
+   }
+  },
+  "unavailable": {
+   "U1": "estimate revision history (no source)",
+   "U2": "the time of day of the next earnings report (no source)",
+   "U3": "quarterly consensus (only annual consensus is available)",
+   "U4": "macro expectations: no source",
+   "U5": "Management discussion (MD&A) of most recent 10-Q, 0001193125-26-436133"
+  },
+  "standing_counts": {
+   "holds": 0,
+   "holds_in_a_narrower_form": 1,
+   "does_not_hold": 0
+  },
+  "check": {
+   "ok": true,
+   "failed_checks": [],
+   "returned_once": false,
+   "in_harness": true
+  }
+ }
+}

@@ -1,0 +1,263 @@
+{
+ "passages": {
+  "method": "chromadb (all-MiniLM-L6-v2, local)",
+  "retrieved": true,
+  "index_note": null,
+  "reason": null,
+  "relevance_bar": 0.45,
+  "topics": [
+   {
+    "id": "TP1",
+    "kind": "claim",
+    "claim_id": "CL1",
+    "text": "EPS $1.89 against $1.97 expected (-4.1%); revenue $201.94B against $202.22B expected (-0.1%). Results below estimates, reported 2026-10-29.",
+    "for": [
+     "P1"
+    ],
+    "against": [
+     "P2"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "stocks keep falling after earnings miss estimates; post-earnings announcement drift after negative surprise",
+      "opposes_query": "post-earnings drift after an earnings miss has disappeared in liquid stocks; a below-estimates result is already priced in",
+      "returned": [
+       "R08-004",
+       "R08-007",
+       "R08-009",
+       "R14-038",
+       "R14-042",
+       "R14-075",
+       "R18-017"
+      ]
+     }
+    ]
+   },
+   {
+    "id": "TPS",
+    "kind": "structure",
+    "claim_id": null,
+    "text": "Long put: buying options (a net debit, defined risk) on a single stock to express a directional view; whether bought options pay after trading costs and time decay",
+    "for": [],
+    "against": [
+     "P3",
+     "P4"
+    ],
+    "nothing_found": false,
+    "searches": [
+     {
+      "supports_query": "buying put options on a single stock to express a bearish view produced returns after costs",
+      "opposes_query": "long options lose value after trading costs and time decay; bought puts fail to pay on average",
+      "returned": [
+       "D1117S3CS-007",
+       "R13-016",
+       "R13-026",
+       "R15-032",
+       "R15-040"
+      ]
+     }
+    ]
+   }
+  ],
+  "passages": {
+   "P1": {
+    "ref": "P1",
+    "passage_id": "R08-004",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 1. Post-earnings announcement drift \u2014 the original effect",
+    "grade": "Strong (for the historical effect)",
+    "text": "**CLAIM:** PEAD is the longest-surviving and best-documented directional anomaly; sorting on standardised unexpected earnings (SUE) historically produced roughly 2% abnormal return over the 60 trading days following an announcement, with drift persisting two to three quarters.\n**SOURCE:** Ball & Brown (1968), *Journal of Accounting Research*; Bernard & Thomas (1989), *Journal of Accounting Research* 27, 1\u201336; reviewed in Josef Fink, \"A Review of the Post-Earnings-Announcement Drift,\" University of Graz Working Paper 2020-04 (Nov 2020), https://static.uni-graz.at/fileadmin/sowi/Working_Paper/2020-04_Fink.pdf \u2014 **peer-reviewed originals, working-paper review**\n**EVIDENCE STRENGTH:** Strong (for the historical effect)\n**HORIZON:** Drift strongest in the first quarter after announcement; persists 2\u20133 quarters. Fink reports Bernard & Thomas at ~2% over 60 trading days, ~4% per quarter; early long/short estimates reach ~18% annualised.\n**DECAY EVIDENCE:** See finding 2 \u2014 substantial.\n**DATA OBTAINABILITY:** Excellent. SUE from a time-series model of quarterly EPS is computable **entirely from EDGAR XBRL** (`EarningsPerShareDiluted`, quarterly, 8+ quarters history). Analyst-based SUE needs IBES or a vendor. Fink notes analyst-forecast-based surprises produce *larger* drift than time-series surprises \u2014 so the free version is the weaker version.\n**IMPLICATION FOR THE APP:** The 60-day drift window maps cleanly onto 60\u201390 DTE contracts. This is the single best horizon fit in the entire literature for this product. The problem is entirely whether it still exists.\n\n---"
+   },
+   "P2": {
+    "ref": "P2",
+    "passage_id": "R08-007",
+    "source": "research-08-equity-direction.md",
+    "section": "FINDINGS > 3. PEAD out of sample, 2023\u20132026",
+    "grade": "Weak (methodologically transparent but unrefereed, <4 years, one regime, self-disclosed probable survivorship bias)",
+    "text": "**CLAIM:** An independent out-of-sample test over 43,111 announcements from Jan 2023 to Oct 2026 finds PEAD still present in large caps but small and fading fast.\n**SOURCE:** Gaurav Gupta, \"Is Post-Earnings Drift Still Tradable? 43,000 Announcements, 2023\u20132026,\" https://guptagaurav.info/articles/earnings-drift \u2014 **practitioner blog post, not peer-reviewed; author discloses AI assistance in the analysis**\n**EVIDENCE STRENGTH:** Weak (methodologically transparent but unrefereed, <4 years, one regime, self-disclosed probable survivorship bias)\n**HORIZON:** Position formed at close of day +1, drift measured days +2 to +61 \u2014 i.e. ~3 months. Direct fit to 60\u201390 DTE.\n**DECAY EVIDENCE:** Top-minus-bottom SUE quintile spread, all sizes: +1.7 pp over 60 days (t = 4.2). Large caps (>$10bn): +2.0 pp (t = 3.4). Mid: +1.4 pp (t = 2.9). Small: +1.1 pp (t = 2.1). **But the spread is +2.6 pp for 2023\u201324 announcements versus +0.5 pp for 2025\u201326.** The earnings-announcement-return (EAR) variant is weaker and insignificant: +1.3 pp (t = 1.4).\n**Net of costs** (mid+large long-short book): gross 7.9%/yr, Sharpe 1.21; 6.0% at 10 bp one-way, 4.0% at 20 bp, 2.1% at 30 bp. Year-by-year at 10 bp: \u22121.3%, +13.6%, +2.2%, +7.9% \u2014 i.e. most of the return came from a single year (2024).\n**DATA OBTAINABILITY:** The signal used is YoY change in quarterly EPS scaled by its own 4\u20138 quarter variability \u2014 **computable from EDGAR XBRL alone**, no IBES required.\n**IMPLICATION FOR THE APP:** The one piece of evidence that PEAD still has a pulse in large caps at the right horizon. Treat it as a hypothesis to re-test, not a result. The 2025\u201326 collapse to +0.5 pp is the number to watch. Note the internal inconsistency flagged in the source (chart commentary describing a 4\u21925.4 point gap does not reconcile with the 1.7 pp headline), which is a reason for caution.\n\n---"
+   },
+   "P3": {
+    "ref": "P3",
+    "passage_id": "R13-026",
+    "source": "research-13-practitioner-benchmarks.md",
+    "section": "PART 5: COMPETITION, CAPACITY, AND WHERE RETAIL EDGE MIGHT EXIST > 5.1 Who is on the other side",
+    "grade": "Moderate-to-Strong (large, granular, but a working paper with a self-selected sample the authors acknowledge).",
+    "text": "**CLAIM:** Retail option trades lose ~0.9% each on average including all costs \u2014 but short option positions were the profitable exception.\n\n**SOURCE:** Vincent Bogousslavsky (Boston College) & Dmitriy Muravyev (UIUC), \"An Anatomy of Retail Option Trading,\" working paper 8 Feb 2025. [WP] \u2014 https://www.brettonwoodsskiconference.com/uploads/b/f9bfc8b0-0251-11ed-a646-3dea17112d2f/An%20Anatomy%20of%20Retail%20Option%20Trading.pdf\n\n- Average option trade returns **\u22120.9%** including commissions, fees and spreads; stock trades near zero. Sample ~$15bn in trades.\n- Per trader-month: option-only traders lose ~**$547**; stock-only traders earn ~$62 (not significant).\n- **0DTE options lose ~4.7% per trade** univariately (2.3\u20133% worse than other options after controls).\n- Index/ETF options ~\u22123% vs single-stock options ~**+0.15%**.\n- **Option purchases lose ~4%. Naked option sales \u2014 only ~13% of option trades \u2014 earn ~20%.** Trader fixed effects do not explain the buyer/seller gap, so it is not a skill difference.\n- **Trade size matters: traders averaging under $200/trade lose ~3.4% per option trade vs ~1.4% for those averaging over $5,000.**\n- The average loss (\u22120.9%) is *smaller* than the typical quoted spread (3.7%), implying retail traders do get fills better than quoted \u2014 consistent with limit-order use and with the price improvement above.\n- The authors note the sample is trade-journal users and may not represent all retail.\n\n**EVIDENCE STRENGTH:** Moderate-to-Strong (large, granular, but a working paper with a self-selected sample the authors acknowledge)."
+   },
+   "P4": {
+    "ref": "P4",
+    "passage_id": "R13-016",
+    "source": "research-13-practitioner-benchmarks.md",
+    "section": "PART 2: WHAT SYSTEMATIC OPTIONS FUNDS AND PROP VOL TRADERS ACTUALLY TRADE > 2.5 Tail hedging and convexity",
+    "grade": "Strong for the proposition that systematic put-buying is costly. The counter-case exists and is serious (see Disconfirming Evidence), and AQR has an institut...",
+    "text": "**CLAIM:** Protective puts usually reduce risk-adjusted outcomes rather than improving them, and simply holding less equity dominates buying puts.\n\n**SOURCE:** Roni Israelov, \"Pathetic Protection: The Elusive Benefits of Protective Puts,\" *Journal of Alternative Investments*, Winter 2019 (dated 31 Dec 2018). [PEER] \u2014 https://www.aqr.com/Insights/Research/White-Papers/Pathetic-Protection-The-Elusive-Benefits-of-Protective-Puts\n\n- Puts reduce drawdowns only in the unusual joint case where options carry no VRP *and* the drawdown coincides with the option's holding window.\n- With a VRP present \u2014 which the author argues is almost always the case in index options \u2014 put protection can *increase* drawdowns and volatility per unit of expected return.\n- Conclusion: because of path dependence and option expensiveness, puts \"may do more harm than good.\"\n- Preferred alternative: reduce equity exposure (a fixed equity/cash split), or diversify into liquid alternatives.\n\nCorroborating data point: **PPUT (5% protective put index) returned 6.64%/yr with Sharpe 0.29 and a \u221238.9% max drawdown over 1986\u20132018 \u2014 it both underperformed the S&P 500 by 3.2 pp/yr and had a worse Sharpe than every option-writing index** (Wilshire 2019 [INDEX]). Bondarenko reports PPUT's *longest* drawdown at 80 months, versus 73 for the S&P 500 \u2014 the hedge lengthened the recovery.\n\n**EVIDENCE STRENGTH:** Strong for the proposition that systematic put-buying is costly. The counter-case exists and is serious (see Disconfirming Evidence), and AQR has an institutional interest in trend-following as the alternative.\n\n**IMPLICATION FOR THE BUILD:** A tail-hedge module is not a defensible use of effort. The cheapest convexity available to this developer is cash.\n\n---"
+   }
+  },
+  "run": {
+   "run_id": "run_9194632b51b1",
+   "status": "ok",
+   "model_calls": 2,
+   "tool_calls": 2,
+   "cost_usd": 0.0015,
+   "returned_once": false,
+   "config": "0c79b26ca92a"
+  }
+ },
+ "saved_at": "2026-11-19T11:00:01-08:00",
+ "critic": {
+  "depends_on": {
+   "claim_id": "CL1",
+   "why": "It is the only claim. The thesis rests on this one earnings miss, so removing it leaves no reason for a lower close. The other findings carry no direction."
+  },
+  "rejected_signals_in_other_words": [],
+  "claims_that_do_not_fit": [],
+  "checks_that_are_one_problem": [
+   {
+    "checks": [
+     "T2",
+     "T3"
+    ],
+    "note": "Both describe the same weakness: the case stands on a single finding, and that finding is graded only moderate because it is not from a primary source."
+   },
+   {
+    "checks": [
+     "C1",
+     "C4"
+    ],
+    "note": "Both come from the breakeven sitting about 4% below spot. A lower close is not enough, so the historical chance of profit falls well below the market-implied figure."
+   }
+  ],
+  "case_for": "Amazon reported earnings per share about 4% below expectations, and revenue came in slightly short. Historical research shows that prices tend to drift in the direction of an earnings surprise for weeks afterward. Free cash flow has turned sharply negative on heavy AI spending. The company also says capital spending will rise meaningfully next year and that it will raise more financing. Those pressures could weigh on the shares over the next month.",
+  "priced_in": [
+   {
+    "claim_id": "CL1",
+    "reading": "Since the miss became public the stock has risen 1.2%, which is 0.13 of a typical realized move. The price has barely moved and has not moved down. That fits either of two readings: the market treated the miss as minor, or the drift has not started. The figure does not show a downside reaction already under way."
+   }
+  ],
+  "case_against": "Over 30-day periods, Amazon closed lower only 41.4% of the time. The stock is slightly up since the miss. Recent out-of-sample work finds earnings drift faded to about half a point in 2025 and 2026, and measures it over 60 days, not 30. The revenue miss is negligible. Research on retail trading finds that bought options lose about 4% on average. Fourth-quarter operating income guidance and AWS growth sit alongside the miss.",
+  "loss_paths": [
+   {
+    "title": "Lower close, but not low enough",
+    "text": "The put needs the stock below $249.38 at expiration. Only 60.4% of past lower-close periods would have been profitable, so the thesis can be right and the position still lose.",
+    "grounds": [
+     "C1"
+    ]
+   },
+   {
+    "title": "History gives worse odds than the market",
+    "text": "On the historical base rate the chance of profit is 23%, against 37.4% implied by option prices. A move of typical size leaves the put short of breakeven.",
+    "grounds": [
+     "C4",
+     "T5"
+    ]
+   },
+   {
+    "title": "Rate decision late in the window",
+    "text": "The FOMC decision on day 20 can lift the shares, or reprice volatility, just as time decay on the put speeds up.",
+    "grounds": [
+     "T6"
+    ]
+   }
+  ],
+  "missing": [
+   {
+    "ref": "U3",
+    "why_it_matters": "Only annual consensus is available, so the basis of the quarterly expected figure behind the miss cannot be confirmed."
+   },
+   {
+    "ref": "U1",
+    "why_it_matters": "Without estimate revision history, it is unknown whether analysts cut forecasts after the miss. That is the channel through which drift usually works."
+   }
+  ],
+  "dispositions": [
+   {
+    "claim_id": "CL1",
+    "standing": "holds_in_a_narrower_form",
+    "reason": "The earnings miss is recorded, but it rests on a moderate, non-primary finding. The revenue shortfall is negligible, and the stock has risen slightly since the report, so the miss supports at most a weak, unconfirmed tilt."
+   }
+  ],
+  "objections": [
+   {
+    "title": "The case rests on one moderate finding.",
+    "text": "A single earnings miss from a non-primary source is the whole thesis. Nothing else carries a direction.",
+    "grounds": [
+     "T2",
+     "T3",
+     "CL1"
+    ]
+   },
+   {
+    "title": "The market has not sold off on the miss.",
+    "text": "The shares are up slightly since the report, so there is no sign yet of the drift the thesis relies on.",
+    "grounds": [
+     "CL1"
+    ]
+   },
+   {
+    "title": "Drift evidence has faded and fits a longer horizon.",
+    "text": "Recent work shows the effect shrinking to about half a point in 2025 and 2026, measured over 60 days, while this horizon is 30.",
+    "grounds": [
+     "P2",
+     "P1"
+    ]
+   },
+   {
+    "title": "The base rate runs against a lower close.",
+    "text": "Amazon closed lower in only 41.4% of past 30-day periods.",
+    "grounds": [
+     "T5"
+    ]
+   },
+   {
+    "title": "Bought puts carry a structural cost.",
+    "text": "Research finds that option purchases lose on average. Here the breakeven requires a decline of about 4%.",
+    "grounds": [
+     "P3",
+     "P4",
+     "C1"
+    ]
+   }
+  ],
+  "run": {
+   "run_id": "run_9398f4fe027b",
+   "status": "ok",
+   "model_calls": 1,
+   "tool_calls": 0,
+   "cost_usd": 0.0891,
+   "returned_once": false,
+   "config": "eab25a0fd56a"
+  },
+  "model": "claude-opus-5-5",
+  "model_family": "Claude",
+  "same_family_as_thesis_agent": true,
+  "priced_in_figures": {
+   "CL1": {
+    "claim_id": "CL1",
+    "finding_id": "F1",
+    "since": "2026-10-29",
+    "pct": 1.2,
+    "typical_moves": 0.13,
+    "typical_move_pct": 9.1,
+    "horizon_days": 30
+   }
+  },
+  "unavailable": {
+   "U1": "estimate revision history (no source)",
+   "U2": "the time of day of the next earnings report (no source)",
+   "U3": "quarterly consensus (only annual consensus is available)",
+   "U4": "macro expectations: no source"
+  },
+  "standing_counts": {
+   "holds": 0,
+   "holds_in_a_narrower_form": 1,
+   "does_not_hold": 0
+  },
+  "check": {
+   "ok": true,
+   "failed_checks": [],
+   "returned_once": false,
+   "in_harness": true
+  }
+ }
+}

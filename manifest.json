@@ -1,0 +1,10 @@
+{
+ "as_of": "2026-11-19T11:00:01-08:00",
+ "snapshot": "chain_snapshot_20261119_110001.csv.gz",
+ "symbols": [
+  "AMZN",
+  "MSFT",
+  "NVDA"
+ ],
+ "note": "A recording for the keyless demo. Not live data."
+}
